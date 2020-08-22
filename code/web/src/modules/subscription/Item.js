@@ -1,5 +1,5 @@
 // Imports
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -28,33 +28,43 @@ class Item extends PureComponent {
   }
 
   onClickUnsubscribe = (id) => {
+    // opens a confirm window to check if the user really wants to unsubscribe 
     let check = confirm('Are you sure you want to unsubscribe to this crate?')
 
+    // if the user says yes to unsubscribe, sets the state to loading while the api call happens  
     if(check) {
       this.setState({
         isLoading: true
       })
 
+      // calls the messageShow method to show the following message while loading 
       this.props.messageShow('Subscribing, please wait...')
 
+      // calls the remove method to remove the subscription based on its id (api call)
       this.props.remove({id})
         .then(response => {
+          // if it is unsuccessful, show an error message 
+          // if it is successful, show successful unsubscribe message 
           if (response.data.errors && response.data.errors.length > 0) {
             this.props.messageShow(response.data.errors[0].message)
           } else {
             this.props.messageShow('Unsubscribed successfully.')
 
+            // calls the getListByUser action 
             this.props.getListByUser()
           }
         })
+        // if there is an error from the api call, shows an error message using messageShow 
         .catch(error => {
           this.props.messageShow('There was some error subscribing to this crate. Please try again.')
         })
+        // once the api call is complete, changes the state so the component is loaded 
         .then(() => {
           this.setState({
             isLoading: false
           })
 
+          // after 5000 milliseconds, calls the messageHide action 
           window.setTimeout(() => {
             this.props.messageHide()
           }, 5000)
@@ -63,6 +73,8 @@ class Item extends PureComponent {
   }
 
   render() {
+
+    // things from the store that the component needs access to to render 
     const { id, crate, createdAt } = this.props.subscription
     const { isLoading } = this.state
 
@@ -80,6 +92,8 @@ class Item extends PureComponent {
           <p style={{ textAlign: 'center', marginTop: '1.5em', marginBottom: '1em' }}>
             <Button
               theme="secondary"
+              // not 100% clear on why this is bound, but on click this calls the method above 
+              // and if the component is loading, it is disabled 
               onClick={this.onClickUnsubscribe.bind(this, id)}
               type="button"
               disabled={ isLoading }
@@ -113,5 +127,9 @@ function itemState(state) {
     user: state.user
   }
 }
-
+/*
+connects the component to the store:
+itemState is mapStateToProps
+the object is mapDispatchToProps
+*/
 export default connect(itemState, { remove, getListByUser, messageShow, messageHide })(withRouter(Item))
