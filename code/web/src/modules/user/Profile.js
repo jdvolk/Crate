@@ -30,6 +30,7 @@ const Profile = (props) => (
       </GridCell>
     </Grid>
 
+  {/* grid that displays the user's info, we will need to add the other user info here! */}
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
@@ -40,7 +41,11 @@ const Profile = (props) => (
           <Button theme="primary">Subscriptions</Button>
         </Link>
 
+  {/* logout button */}
         <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+
+      {/* this might be a good place to render the form, or we could render it below the Grid  */}
+
       </GridCell>
     </Grid>
   </div>
@@ -59,4 +64,9 @@ function profileState(state) {
   }
 }
 
+/* 
+connects the component to the redux store:
+it gets its state from profileState, which is the same as mapStateToProps
+and it uses logout to change the store (which is the same as mapDispatchToProps)
+*/
 export default connect(profileState, { logout })(Profile)
