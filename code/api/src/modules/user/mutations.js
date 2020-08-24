@@ -5,6 +5,8 @@ import { GraphQLString, GraphQLInt } from 'graphql'
 import { UserType } from './types'
 import { create, remove } from './resolvers'
 
+
+
 // Create
 export const userSignup = {
   type: UserType,
@@ -38,3 +40,12 @@ export const userRemove = {
   },
   resolve: remove
 }
+// ^^^^^
+// front end data will post request when it hits
+//the API (create or remove). Requires resolvers which requires the
+//`setup/models` which finds out what resources to create.
+
+
+// Add argumentss that a user will be able to update:shipping address and email address.
+
+// Create an update action in resolvers file

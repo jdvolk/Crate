@@ -23,3 +23,6 @@ module.exports = function(sequelize, DataTypes) {
 
   return User
 }
+
+//^^^^
+// The above are attributes for a user, we will need to add  profilePicture, description, and shipping address.
