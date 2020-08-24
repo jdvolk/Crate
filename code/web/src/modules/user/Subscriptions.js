@@ -15,7 +15,7 @@ import Loading from '../common/Loading'
 import EmptyMessage from '../common/EmptyMessage'
 import SubscriptionItem from '../subscription/Item'
 
-// Component
+// Component -PureComponent meaning it will not re-render unless state or props change
 class Subscriptions extends PureComponent {
 
   // Runs on server only for SSR
@@ -24,6 +24,7 @@ class Subscriptions extends PureComponent {
   }
 
   // Runs on client only
+  // gets the users subscriptions when the client first mounts
   componentDidMount() {
     this.props.getListByUser()
   }
@@ -50,6 +51,10 @@ class Subscriptions extends PureComponent {
         {/* Product list */}
         <Grid>
           <GridCell>
+          // iof component is loading, it loads the "Loading component"
+          // if it is loaded, loads the subscription list, which either renders as:
+          //EmptyMessage if there are no subscriptions,
+          // or the subscriptions if there are any
             {
               this.props.subscriptions.isLoading
                 ? <Loading/>
@@ -81,4 +86,5 @@ function subscriptionsState(state) {
   }
 }
 
+// connects the component to the store using mapStateToProps and mapDispatchToProps
 export default connect(subscriptionsState, { getListByUser })(Subscriptions)

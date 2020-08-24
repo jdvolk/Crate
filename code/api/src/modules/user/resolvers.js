@@ -20,12 +20,15 @@ export async function create(parentValue, { name, email, password }) {
       name,
       email,
       password: passwordHashed
+      // add in more attributes
     })
   } else {
     // User exists
     throw new Error(`The email ${ email } is already registered. Please try to login.`)
   }
 }
+
+// add in resolver for Updating User info
 
 export async function login(parentValue, { email, password }) {
   const user = await models.User.findOne({ where: { email } })

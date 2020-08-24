@@ -38,3 +38,5 @@ export const userRemove = {
   },
   resolve: remove
 }
+
+// Add method for updating user info

@@ -20,34 +20,53 @@ export const SUBSCRIPTIONS_GET_FAILURE = 'SUBSCRIPTIONS/GET_FAILURE'
 
 // Get list of subscriptions
 export function getList(isLoading = true) {
+  // set loading to true
   return dispatch => {
+    // dispatch the action
     dispatch({
       type: SUBSCRIPTIONS_GET_LIST_REQUEST,
+      // set type of action
       error: null,
+      // set error to null
       isLoading
+      // set isLoading to true
     })
 
     return axios.post(routeApi, query({
+      // createsd a post request to the route and begins building a query
       operation: 'subscriptions',
+      // set the name of the query
       fields: ['id', 'user { name, email }', 'crate { id, name, description }', 'createdAt']
+      // set the fields of the query. id, userdetails, the crate details, when it was created at
     }))
       .then(response => {
         if (response.status === 200) {
+          // if request is successful,
           dispatch({
             type: SUBSCRIPTIONS_GET_LIST_RESPONSE,
+            // set the type of action to get list response
             error: null,
+            // set error to null
             isLoading: false,
+            // set isLoading to false
             list: response.data.data.subscriptions
+            // set the list of creates to what we get back from the response
           })
         } else {
           console.error(response)
+          // if the status of the response is anything other than 200
+         // pull up an error in the console with the entire response
         }
       })
       .catch(error => {
+        // if there is an error
         dispatch({
           type: SUBSCRIPTIONS_GET_LIST_FAILURE,
+          // dispatch the get list failure
           error: 'Some error occurred. Please try again.',
+          // change the state error
           isLoading: false
+          // set isLoading false
         })
       })
   }
@@ -56,26 +75,37 @@ export function getList(isLoading = true) {
 
 // Get list of subscriptions by user
 export function getListByUser(isLoading = true) {
+  // set param name isLoading to true
   return dispatch => {
     dispatch({
       type: SUBSCRIPTIONS_GET_LIST_BY_USER_REQUEST,
+      // create a dispatch and set action type
       error: null,
       isLoading
     })
 
     return axios.post(routeApi, query({
+      // creatre post request and build query
       operation: 'subscriptionsByUser',
+      //  name query
       fields: ['id', 'user { name, email }', 'crate { id, name, description }', 'createdAt']
+      // create query fields
     }))
       .then(response => {
         if (response.status === 200) {
+          // if successful response
           dispatch({
             type: SUBSCRIPTIONS_GET_LIST_BY_USER_RESPONSE,
+            // dispatch action and set type
             error: null,
+            // set sgtate aerror to null bc the response was successfull
             isLoading: false,
+            // set loading state to false
             list: response.data.data.subscriptionsByUser
+            // set state of the lisgt to the date from the response
           })
         } else {
+          // or error it up
           console.error(response)
         }
       })
@@ -122,11 +152,16 @@ export function get(slug, isLoading = true) {
 
 // Create subscription
 export function create(variables) {
+  // create a subscription
   return dispatch => {
     return axios.post(routeApi, mutation({
+      // create a post reauest with a mutation query
       operation: 'subscriptionCreate',
+      // names the operation
       variables,
+      // pass through variables
       fields: ['id']
+      // assign an id
     }))
   }
 }
@@ -135,9 +170,13 @@ export function create(variables) {
 export function remove(variables) {
   return dispatch => {
     return axios.post(routeApi, mutation({
+      // create a post request with a mutation to delete a sub
       operation: 'subscriptionRemove',
+      // name the query
       variables,
+      // pass through variables
       fields: ['id']
+      // gives id
     }))
   }
 }

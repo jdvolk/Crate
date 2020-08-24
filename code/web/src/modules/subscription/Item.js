@@ -28,28 +28,35 @@ class Item extends PureComponent {
   }
 
   onClickUnsubscribe = (id) => {
+    // opens a confirm pop-up window to ensure the user really wants to unsubscribe
     let check = confirm('Are you sure you want to unsubscribe to this crate?')
-
+    // set state to loading while API call happens is user says yes to unsubscribe
     if(check) {
       this.setState({
         isLoading: true
       })
 
+      // calls messageShow method to to show this message while the backend loads
       this.props.messageShow('Subscribing, please wait...')
 
+      // calls remove method to remove the correct subscription based on the database call
       this.props.remove({id})
         .then(response => {
+          // if there is an error, render that error
           if (response.data.errors && response.data.errors.length > 0) {
             this.props.messageShow(response.data.errors[0].message)
           } else {
+            // if successful, render successful messsage
             this.props.messageShow('Unsubscribed successfully.')
 
+            // calls get list by user action
             this.props.getListByUser()
           }
         })
         .catch(error => {
           this.props.messageShow('There was some error subscribing to this crate. Please try again.')
         })
+        // once the subscription is removed from the database, changes the state so the component is loaded
         .then(() => {
           this.setState({
             isLoading: false
@@ -62,6 +69,7 @@ class Item extends PureComponent {
     }
   }
 
+// things form the store that the component needs access to render
   render() {
     const { id, crate, createdAt } = this.props.subscription
     const { isLoading } = this.state
@@ -113,5 +121,9 @@ function itemState(state) {
     user: state.user
   }
 }
+
+// connects to the component store
+//itemState is mapStatetoProps
+// object is mapdispatch toProps
 
 export default connect(itemState, { remove, getListByUser, messageShow, messageHide })(withRouter(Item))

@@ -30,6 +30,7 @@ const Profile = (props) => (
       </GridCell>
     </Grid>
 
+    //Grid that displays user info, we will need to add new attributes here(Description, address, etc.)
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
@@ -39,8 +40,10 @@ const Profile = (props) => (
         <Link to={userRoutes.subscriptions.path}>
           <Button theme="primary">Subscriptions</Button>
         </Link>
-
+        // logout button
         <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+
+        //good place to render form, or below grid
       </GridCell>
     </Grid>
   </div>
@@ -58,5 +61,9 @@ function profileState(state) {
     user: state.user
   }
 }
+
+//connects component to the redux store
+// get the sgate from profileState, which is the same as mapStateToProps
+// uses logout to change the store (same as mapDispatchToProps)
 
 export default connect(profileState, { logout })(Profile)

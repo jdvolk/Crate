@@ -42,6 +42,8 @@ export const userLogin = {
   resolve: login
 }
 
+// Add query to get products for a particular user
+
 // Genders
 export const userGenders = {
   type: new GraphQLList(UserGenderType),
