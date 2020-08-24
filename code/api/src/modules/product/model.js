@@ -22,4 +22,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT
     }
   })
+
+  // Product.associate = function(models) {
+  //   Product.hasMany(models.Product, {
+  //    through: 'CrateProducts',
+  //    as: 'crates'
+  //  })
+  // }
+  // return Product
 }

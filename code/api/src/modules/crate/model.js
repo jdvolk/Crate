@@ -10,9 +10,13 @@ module.exports = function(sequelize, DataTypes) {
     }
   })
 
-  Crate.associate = function(models) {
-    Crate.hasMany(models.Subscription)
-  }
+  // Crate.associate = function(models) {
+  //   Crate.hasMany(models.Subscription)
+  //   Crate.hasMany(models.Product, {
+  //    through: 'CrateProducts',
+  //    as: 'products'
+  //  })
+  // }
 
   return Crate
 }
