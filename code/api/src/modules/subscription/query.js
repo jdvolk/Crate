@@ -4,12 +4,19 @@ import { GraphQLInt, GraphQLList } from 'graphql'
 // App Imports
 import SubscriptionType from './types'
 import { getAll, getByUser, get } from './resolvers'
+// add updateDelivery method to line 6
 
 // Subscriptions All
 export const subscriptions = {
   type: new GraphQLList(SubscriptionType),
   resolve: getAll
 }
+
+// Subscriptions Update Delivery
+// export const subscriptionUpdate = {
+//   type: new GraphQLList(SubscriptionType),
+//   resolve: updateDelivery
+// }
 
 // Subscriptions by user
 export const subscriptionsByUser = {
