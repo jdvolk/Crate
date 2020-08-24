@@ -28,4 +28,5 @@ module.exports = function(sequelize, DataTypes) {
   }
 
   return Subscription
+  // return the Subscription model
 }
