@@ -15,16 +15,20 @@ import {
 
 // Subscriptions list
 
-// Initial State
+// Initial State of the subscriptions reducer
 const subscriptionsInitialState = {
   isLoading: false,
   error: null,
   list: []
 }
 
-// State
+// State - reducer that handles actions for subscription component
+//has initial state param in case state is not passed in,
+//and what the action type is
 export const subscriptions = (state = subscriptionsInitialState, action) => {
   switch (action.type) {
+    //if the action is the get list request,
+    //sets the state to loading and error to null
     case SUBSCRIPTIONS_GET_LIST_REQUEST:
       return {
         ...state,
@@ -32,6 +36,8 @@ export const subscriptions = (state = subscriptionsInitialState, action) => {
         error: null
       }
 
+      //if it is reponse,
+      //sets the state to not loading, and returns the error and list
     case SUBSCRIPTIONS_GET_LIST_RESPONSE:
       return {
         ...state,
@@ -40,6 +46,8 @@ export const subscriptions = (state = subscriptionsInitialState, action) => {
         list: action.list
       }
 
+        //if it is a failure,
+        // returns the error and not loading
     case SUBSCRIPTIONS_GET_LIST_FAILURE:
       return {
         ...state,
@@ -47,6 +55,7 @@ export const subscriptions = (state = subscriptionsInitialState, action) => {
         error: action.error
       }
 
+      //always returns the state
     default:
       return state
   }
@@ -54,14 +63,15 @@ export const subscriptions = (state = subscriptionsInitialState, action) => {
 
 // Subscriptions list by user
 
-// Initial State
+// Initial State - same as above, initial state for the reducer below
 const subscriptionsByUserInitialState = {
   isLoading: false,
   error: null,
   list: []
 }
 
-// State
+// State - this does the exact same thing, but for the subscriptionsByUser, 
+//so for specifically a user's subscriptions rather than all subscriptions
 export const subscriptionsByUser = (state = subscriptionsByUserInitialState, action) => {
   switch (action.type) {
     case SUBSCRIPTIONS_GET_LIST_BY_USER_REQUEST:
@@ -93,14 +103,14 @@ export const subscriptionsByUser = (state = subscriptionsByUserInitialState, act
 
 // Single subscription
 
-// Initial State
+// Initial State - same as above
 const subscriptionInitialState = {
   isLoading: false,
   error: null,
   item: {}
 }
 
-// State
+// State - same as above, but only for one subscription
 export const subscription = (state = subscriptionInitialState, action) => {
   switch (action.type) {
     case SUBSCRIPTIONS_GET_REQUEST:
