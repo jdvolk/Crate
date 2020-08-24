@@ -13,7 +13,7 @@ export async function create(parentValue, { name, email, password }) {
   const user = await models.User.findOne({ where: { email } })
 
   if (!user) {
-    // User does not exists
+    // if the user does not exists, creates a hashed password (meaning it's hidden?) before storing it
     const passwordHashed = await bcrypt.hash(password, serverConfig.saltRounds)
 
     return await models.User.create({
@@ -27,6 +27,7 @@ export async function create(parentValue, { name, email, password }) {
   }
 }
 
+//creates an update resolver
 export async function login(parentValue, { email, password }) {
   const user = await models.User.findOne({ where: { email } })
 
