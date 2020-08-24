@@ -27,7 +27,7 @@ export const subscriptionsByUser = {
   type: new GraphQLList(SubscriptionType),
   // set type to SubscriptionType
   resolve: getByUser
-  // resolver emthod getByUser
+  // resolver method getByUser
 }
 
 // Subscription By id
