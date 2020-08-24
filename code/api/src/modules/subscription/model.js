@@ -6,15 +6,19 @@ module.exports = function(sequelize, DataTypes) {
     // define subscriptions model as 'subscriptions'
     userId: {
       type: DataTypes.INTEGER
-      // set userId to integers
+      // set userId datatype to integers
     },
     crateId: {
       type: DataTypes.INTEGER
-      // set crateId to integers
+      // set crateId datatype to integers
 
     }
-    // setting up the belongs_to relationships for subscriptions to attach to User models and crate models
+    // this sets up the belongs_to relationships for subscriptions to attach to User models and crate models
+    // saving the crate id and the user id to the subscription gives you easy access to its parent models
+    // these are called one_to_many relationships a Subscription can only belong to one user,
+    // but a user can have_many subscriptions
 
+    // add in expectedDelivery attribute
 //  expectedDelivery: {
 //    type: DataTypes.DATE
 //  }
