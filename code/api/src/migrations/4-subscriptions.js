@@ -23,6 +23,10 @@ module.exports = {
         },
         allowNull: false
       },
+      // We will need to add in an attribute for expected delivery date
+      //  expected_delivery: {
+      //     type: Sequelize.DATE
+      //   },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
