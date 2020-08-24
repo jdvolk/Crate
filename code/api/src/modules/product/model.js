@@ -25,8 +25,12 @@ module.exports = function(sequelize, DataTypes) {
 
   // Product.associate = function(models) {
   //   Product.hasMany(models.Product, {
+     // add a has_many association to crate_products so that crates can have many products
+     // and products can have many crates
   //    through: 'CrateProducts',
+     // through the new table crate_products
   //    as: 'crates'
+     // named as: crates
   //  })
   // }
   // return Product
