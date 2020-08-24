@@ -9,6 +9,21 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.TEXT
     },
+    description: {
+      type: DataTypes.TEXT
+    },
+    shipping_address: {
+      type: DataTypes.TEXT
+    },
+    city: {
+      type: DataTypes.TEXT
+    },
+    state: {
+      type: DataTypes.TEXT
+    },
+    zip: {
+      type: DataTypes.TEXT
+    },
     password: {
       type: DataTypes.TEXT
     },
