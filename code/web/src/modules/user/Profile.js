@@ -22,7 +22,7 @@ class Profile extends React.Component {
   constructor() {
     super()
     this.state = {
-      modalDisplay: true,
+      modalDisplay: false,
     }
   }
 
@@ -33,7 +33,7 @@ class Profile extends React.Component {
   }
 
   submit = () => {
-    
+
   }
 
   render() {
@@ -72,12 +72,14 @@ class Profile extends React.Component {
         <Button theme="secondary" onClick={this.props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
       </GridCell>
     </Grid>
+    {this.state.modalDisplay ? 
     <Grid>
       <ProfileForm 
         submit={this.submit}
         toggleModal={this.toggleModal}
       />
-    </Grid>
+    </Grid> 
+    : null}
   </div>
     )
   }
