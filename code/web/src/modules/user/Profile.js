@@ -11,6 +11,8 @@ import { H3, H4 } from '../../ui/typography'
 import Button from '../../ui/button'
 import { grey, grey2 } from '../../ui/common/colors'
 
+import ProfileForm from './ProfileForm'
+
 // App Imports
 import userRoutes from '../../setup/routes/user'
 import { logout } from './api/actions'
@@ -28,6 +30,10 @@ class Profile extends React.Component {
     this.setState((prevState) => {
       return { modalDisplay: !prevState.modalDisplay }
     })
+  }
+
+  submit = () => {
+    
   }
 
   render() {
@@ -67,7 +73,10 @@ class Profile extends React.Component {
       </GridCell>
     </Grid>
     <Grid>
-      <ProfileForm />
+      <ProfileForm 
+        submit={this.submit}
+        toggleModal={this.toggleModal}
+      />
     </Grid>
   </div>
     )
