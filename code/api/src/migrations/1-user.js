@@ -13,21 +13,6 @@ module.exports = {
       email: {
         type: Sequelize.TEXT
       },
-      description: {
-        type: Sequelize.TEXT
-      },
-      shipping_address: {
-        type: Sequelize.TEXT
-      },
-      city: {
-        type: Sequelize.TEXT
-      },
-      state: {
-        type: Sequelize.TEXT
-      },
-      zip: {
-        type: Sequelize.INTEGER
-      },
       password: {
         type: Sequelize.TEXT
       },
