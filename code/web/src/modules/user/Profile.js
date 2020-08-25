@@ -19,7 +19,15 @@ import { logout } from './api/actions'
 class Profile extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      modalDisplay: true,
+    }
+  }
+
+  toggleModal = () => {
+    this.setState((prevState) => {
+      return { modalDisplay: !prevState.modalDisplay }
+    })
   }
 
   render() {
@@ -57,6 +65,9 @@ class Profile extends React.Component {
 
         <Button theme="secondary" onClick={this.props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
       </GridCell>
+    </Grid>
+    <Grid>
+      <ProfileForm />
     </Grid>
   </div>
     )
