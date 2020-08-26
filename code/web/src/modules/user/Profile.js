@@ -51,6 +51,7 @@ class Profile extends React.Component {
       </GridCell>
     </Grid>
 
+    {!this.state.modalDisplay ?
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{this.props.user.details.name}</H4>
@@ -71,7 +72,7 @@ class Profile extends React.Component {
 
         <Button theme="secondary" onClick={this.props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
       </GridCell>
-    </Grid>
+    </Grid> : null}
     {this.state.modalDisplay ? 
     <Grid>
       <ProfileForm 
