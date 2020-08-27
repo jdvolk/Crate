@@ -28,33 +28,37 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 //Update
-export async function update(parentValue, { name, email, description, city, state, zip, shipping_address}) {
-  if(!email) {
-    const user = await models.User.findOne({ where: { email }})
-    if(!user) {
-      return await models.User.update({
-                  name,
-                  email,
-                  description,
-                  city,
-                  state,
-                  zip,
-                  shipping_address
-                })
-              } else {
-                throw new Error('Email already exists')
-              }
-            }  else {
-                return await models.User.update({
-                            name,
-                            email,
-                            description,
-                            city,
-                            state,
-                            zip,
-                            shipping_address
-                          })
-                        }
+export async function update(parentValue, { id, name, email, description, city, state, zip, shipping_address}) {
+    if(!email) {
+      const user = await models.User.findOne({ where: { email }})
+      if(!user) {
+        return await models.User.update({
+                    name,
+                    email,
+                    description,
+                    city,
+                    state,
+                    zip,
+                    shipping_address
+                  },
+                { where: { id} }
+                )
+                } else {
+                  throw new Error('Email already exists')
+                }
+              }  else {
+                  return await models.User.update({
+                              name,
+                              email,
+                              description,
+                              city,
+                              state,
+                              zip,
+                              shipping_address
+                            },
+                          { where: { id } }
+                          ))
+                          }
 
   }
 
