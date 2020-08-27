@@ -28,7 +28,8 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 //Update
-export async function update(parentValue, { id, name, email, description, city, state, zip, shipping_address}) {
+export async function update(parentValue, { name, email, description, city, state, zip, shipping_address }, { auth }) {
+  auth = auth.user.id
     if(!email) {
       const user = await models.User.findOne({ where: { email }})
       if(!user) {
@@ -41,26 +42,25 @@ export async function update(parentValue, { id, name, email, description, city, 
         zip,
         shipping_address
       },
-    { where: { id} }
+    { where: { id: auth }  }
     )
     } else {
       throw new Error('Email already exists')
     }
-  }  else {
-      return await models.User.update({
-                  name,
-                  email,
-                  description,
-                  city,
-                  state,
-                  zip,
-                  shipping_address
-                },
-              { where: { id } }
-              )
-              }
-
+  } else {
+    return await models.User.update({
+      name,
+      email,
+      description,
+      city,
+      state,
+      zip,
+      shipping_address
+      },
+    { where: { id: auth } }
+    )
   }
+}
 
 export async function login(parentValue, { email, password }) {
   const user = await models.User.findOne({ where: { email } })
