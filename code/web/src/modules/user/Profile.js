@@ -61,7 +61,7 @@ class Profile extends React.Component {
 
 
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.email}</p>
-        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.shippingAddress} address</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.shipping_address} address</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.city}city, {this.props.user.details.state}state {this.props.user.details.zip}zip</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.description}description</p>
         <Button theme="primary" style={{ marginRight: '1em' }} onClick={this.toggleModal}>Update Profile</Button>
