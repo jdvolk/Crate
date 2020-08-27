@@ -22,7 +22,7 @@ class ProfileForm extends PureComponent {
     this.state = {
       // name: props.user.details.name,
       email: props.user.details.email,
-      address: props.user.details.shippingAddress,
+      shipping_address: props.user.details.shippingAddress,
       city: props.user.details.city,
       state: props.user.details.state,
       zip: props.user.details.zip,
@@ -66,8 +66,8 @@ class ProfileForm extends PureComponent {
             type='text' 
             placeholder={this.props.user.shippingAddress}
             onChange={this.handleChange}
-            value={this.state.address || ''}
-            name='address'
+            value={this.state.shipping_address || ''}
+            name='shipping_address'
           />
           <br />
           <p style={{ color: grey2 }}>City:</p>

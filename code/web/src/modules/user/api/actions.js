@@ -77,6 +77,7 @@ export function updateUser(userDetails) {
       fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
     }))
     .then(response => {
+      console.log('response', response);
       // error = ''
 
       //   const token = response.data.data.userLogin.token
@@ -92,7 +93,7 @@ export function updateUser(userDetails) {
 
       })
       .catch(error => {
-        console.log(error);
+        console.log('error', error);
         // dispatch({
         //   type: UPDATE_USER,
         //   error: 'please try again'

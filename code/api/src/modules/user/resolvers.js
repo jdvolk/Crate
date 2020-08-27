@@ -28,7 +28,7 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 //Update
-export async function update(parentValue, { name, email, description, city, state, zip, shipping_address}) {
+export async function update(parentValue, { name, email, description, city, state, zip, shipping_address }) {
   if(!email) {
     const user = await models.User.findOne({ where: { email }})
     if(!user) {
