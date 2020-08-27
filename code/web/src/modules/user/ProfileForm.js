@@ -11,6 +11,7 @@ import { grey, grey2 } from '../../ui/common/colors'
 
 // App Imports 
 import userRoutes from '../../setup/routes/user'
+import { updateUser } from './api/actions'
 
 // Component
 class ProfileForm extends PureComponent {
@@ -19,11 +20,13 @@ class ProfileForm extends PureComponent {
     super(props)
 
     this.state = {
+      // name: props.user.details.name,
       email: props.user.details.email,
       address: props.user.details.shippingAddress,
       city: props.user.details.city,
       state: props.user.details.state,
-      zip: props.user.details.zip
+      zip: props.user.details.zip,
+      description: props.user.details.description
     }
   }
 
@@ -33,17 +36,30 @@ class ProfileForm extends PureComponent {
     })
   }
 
+  async onSubmit(event) {
+    event.preventDefault()
+    console.log(this.state)
+    try {
+      updateUser(this.state)
+    } catch (error) {
+      console.error(error)
+    }
+      // .then(response => {
+      // })
+
+  }
+
   render() {
     return (
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <H4>Edit My Profile</H4>
           <p style={{ color: grey2 }}>Email:</p>
           <input 
             type='email' 
             placeholder={this.props.user.details.email}
             onChange={this.handleChange}
-            value={this.state.email}
+            value={this.state.email || ''}
             name='email'
           />
           <br />
@@ -52,7 +68,7 @@ class ProfileForm extends PureComponent {
             type='text' 
             placeholder={this.props.user.shippingAddress}
             onChange={this.handleChange}
-            value={this.state.address}
+            value={this.state.address || ''}
             name='address'
           />
           <br />
@@ -61,7 +77,7 @@ class ProfileForm extends PureComponent {
             type='text' 
             placeholder={this.props.user.city}
             onChange={this.handleChange}
-            value={this.state.city}
+            value={this.state.city || ''}
             name='city'
           />
           <br />
@@ -70,7 +86,7 @@ class ProfileForm extends PureComponent {
             type='text' 
             placeholder={this.props.user.state}
             onChange={this.handleChange}
-            value={this.state.state}
+            value={this.state.state || ''}
             name='state'
           />
           <br />
@@ -79,7 +95,7 @@ class ProfileForm extends PureComponent {
             type='text' 
             placeholder={this.props.user.zip}
             onChange={this.handleChange}
-            value={this.state.zip}
+            value={this.state.zip || ''}
             name='zip'
           />
           <br />
@@ -87,12 +103,12 @@ class ProfileForm extends PureComponent {
           <textarea 
             placeholder={this.props.user.description}
             onChange={this.handleChange}
-            value={this.state.description}
+            value={this.state.description || ''}
             name='description'>
           </textarea>
           <br />
           <Button theme="secondary" style={{ marginRight: '1em' }} onClick={this.props.toggleModal}>Cancel</Button>
-          <Button theme="primary" onClick={this.props.submit}>Save</Button>
+          <Button type="submit" theme="primary">Save</Button>
         </form>
       </GridCell>
     )
@@ -113,4 +129,5 @@ function profileFormState(state) {
   }
 }
 
-export default connect(profileFormState)(ProfileForm)
+//export default connect(profileFormState)(ProfileForm)
+export default connect(profileFormState, { updateUser })(ProfileForm)

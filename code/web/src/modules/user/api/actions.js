@@ -11,6 +11,7 @@ export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'
 
 // Actions
 
@@ -66,6 +67,30 @@ export function login(userCredentials, isLoading = true) {
   }
 }
 
+export function updateUser(userDetails) {
+  return async dispatch => {
+    console.log('post request to update')
+    try {
+      const response = await axios.post(routeApi, mutation({
+        operation: 'userUpdate',
+        variables: userDetails,
+        fields: ['name', 'email', 'shipping_address', 'city', 'state', 'zip', 'description']
+      }))
+      console.log(response)
+      dispatch({
+        type: UPDATE_USER,
+      })
+    }
+    catch (error) {
+      dispatch({
+        type: UPDATE_USER,
+        error
+      })
+      return console.log(error)
+    }
+  }
+}
+
 // Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
   // Update token
@@ -86,6 +111,8 @@ export function register(userDetails) {
     }))
   }
 }
+
+
 
 // Log out user and remove token from localStorage
 export function logout() {
