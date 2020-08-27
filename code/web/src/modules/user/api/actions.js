@@ -37,7 +37,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role}', 'token']
+      fields: ['user {name, email, role, shipping_address, city, state, zip, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -68,9 +68,7 @@ export function login(userCredentials, isLoading = true) {
 }
 
 export function updateUser(userDetails) {
-  console.log('post')
   return dispatch => {
-    console.log('post request to update')
     return axios.post(routeApi, mutation({
       operation: 'userUpdate',
       variables: userDetails,
@@ -78,28 +76,32 @@ export function updateUser(userDetails) {
     }))
     .then(response => {
       console.log('response', response);
-      // error = ''
+      // let error = ''
 
-      //   const token = response.data.data.userLogin.token
-      //   const user = response.data.data.userLogin.user
-      //   console.log(response)
+      // if (response.data.errors && response.data.errors.length > 0) {
+      //   error = response.data.errors[0].message
+      // } else {
+      //   const user = response.data.data.userUpdate
+      //   console.log('user', user);
 
-      //   dispatch({
-      //     type: UPDATE_USER,
-      //     error
-      //   })
+      //   dispatch(setUser(user))
 
-        // dispatch(setUser(token, user))
+      //   updateUser(user)
+      // }
 
-      })
-      .catch(error => {
-        console.log('error', error);
-        // dispatch({
-        //   type: UPDATE_USER,
-        //   error: 'please try again'
-        // })
+      // dispatch({
+      //   type: LOGIN_RESPONSE,
+      //   error
+      // })
 
       })
+    .catch(error => {
+      dispatch({
+        type: UPDATE_USER,
+        error: 'please try again'
+      })
+
+    })
   }
 }
 

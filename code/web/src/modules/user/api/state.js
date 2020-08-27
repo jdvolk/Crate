@@ -39,7 +39,6 @@ export default (state = userInitialState, action) => {
         ...state,
         error: action.error,
         isLoading: false
-
       }
 
     case LOGOUT:

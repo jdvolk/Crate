@@ -20,9 +20,9 @@ class ProfileForm extends PureComponent {
     super(props)
 
     this.state = {
-      // name: props.user.details.name,
+      name: props.user.details.name,
       email: props.user.details.email,
-      shipping_address: props.user.details.shippingAddress,
+      shipping_address: props.user.details.shipping_address,
       city: props.user.details.city,
       state: props.user.details.state,
       zip: props.user.details.zip,
@@ -38,7 +38,6 @@ class ProfileForm extends PureComponent {
 
   onSubmit = (event) => {
     event.preventDefault()
-    // console.log({...this.((state})
 
     updateUser(this.state)()
 
@@ -64,7 +63,7 @@ class ProfileForm extends PureComponent {
           <p style={{ color: grey2 }}>Address:</p>
           <input 
             type='text' 
-            placeholder={this.props.user.shippingAddress}
+            placeholder={this.props.user.shipping_address}
             onChange={this.handleChange}
             value={this.state.shipping_address || ''}
             name='shipping_address'
