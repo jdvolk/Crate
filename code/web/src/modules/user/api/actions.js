@@ -68,26 +68,37 @@ export function login(userCredentials, isLoading = true) {
 }
 
 export function updateUser(userDetails) {
-  return async dispatch => {
+  console.log('post')
+  return dispatch => {
     console.log('post request to update')
-    try {
-      const response = await axios.post(routeApi, mutation({
-        operation: 'userUpdate',
-        variables: userDetails,
-        fields: ['name', 'email', 'shipping_address', 'city', 'state', 'zip', 'description']
-      }))
-      console.log(response)
-      dispatch({
-        type: UPDATE_USER,
+    return axios.post(routeApi, mutation({
+      operation: 'userUpdate',
+      variables: userDetails,
+      fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
+    }))
+    .then(response => {
+      // error = ''
+
+      //   const token = response.data.data.userLogin.token
+      //   const user = response.data.data.userLogin.user
+      //   console.log(response)
+
+      //   dispatch({
+      //     type: UPDATE_USER,
+      //     error
+      //   })
+
+        // dispatch(setUser(token, user))
+
       })
-    }
-    catch (error) {
-      dispatch({
-        type: UPDATE_USER,
-        error
+      .catch(error => {
+        console.log(error);
+        // dispatch({
+        //   type: UPDATE_USER,
+        //   error: 'please try again'
+        // })
+
       })
-      return console.log(error)
-    }
   }
 }
 

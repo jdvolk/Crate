@@ -36,14 +36,12 @@ class ProfileForm extends PureComponent {
     })
   }
 
-  async onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state)
-    try {
-      updateUser(this.state)
-    } catch (error) {
-      console.error(error)
-    }
+    // console.log({...this.((state})
+
+    updateUser(this.state)()
+
       // .then(response => {
       // })
 
