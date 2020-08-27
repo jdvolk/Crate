@@ -11,13 +11,34 @@ import { H3, H4 } from '../../ui/typography'
 import Button from '../../ui/button'
 import { grey, grey2 } from '../../ui/common/colors'
 
+import ProfileForm from './ProfileForm'
+
 // App Imports
 import userRoutes from '../../setup/routes/user'
 import { logout } from './api/actions'
 
 // Component
-const Profile = (props) => (
-  <div>
+class Profile extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      modalDisplay: false,
+    }
+  }
+
+  toggleModal = () => {
+    this.setState((prevState) => {
+      return { modalDisplay: !prevState.modalDisplay }
+    })
+  }
+
+  submit = () => {
+
+  }
+
+  render() {
+    return (
+      <div>
     {/* SEO */}
     <Helmet>
       <title>My Profile - Crate</title>
@@ -30,21 +51,41 @@ const Profile = (props) => (
       </GridCell>
     </Grid>
 
+    {!this.state.modalDisplay ?
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-        <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
+        <H4 style={{ marginBottom: '0.5em' }}>{this.props.user.details.name}</H4>
 
-        <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
+        <img src='' alt='your profile image'/><br />
+        <Button theme="primary" style={{ margin: '0.5em' }}>Update Image</Button>
+
+
+        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.email}</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.shippingAddress} address</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.city}city, {this.props.user.details.state}state {this.props.user.details.zip}zip</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.description}description</p>
+        <Button theme="primary" style={{ marginRight: '1em' }} onClick={this.toggleModal}>Update Profile</Button>
 
         <Link to={userRoutes.subscriptions.path}>
           <Button theme="primary">Subscriptions</Button>
         </Link>
 
-        <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+        <Button theme="secondary" onClick={this.props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
       </GridCell>
-    </Grid>
+    </Grid> : null}
+    {this.state.modalDisplay ? 
+    <Grid>
+      <ProfileForm 
+        submit={this.submit}
+        toggleModal={this.toggleModal}
+      />
+    </Grid> 
+    : null}
   </div>
-)
+    )
+  }
+  
+}
 
 // Component Properties
 Profile.propTypes = {
