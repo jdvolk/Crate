@@ -28,6 +28,7 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 //Update
+<<<<<<< HEAD
 export async function update(parentValue, { name, email, description, city, state, zip, shipping_address}) {
   if(!email) {
     const user = await models.User.findOne({ where: { email }})
@@ -57,6 +58,50 @@ export async function update(parentValue, { name, email, description, city, stat
                         }
 
   }
+=======
+export async function update(parentValue, { name, email, description, city, state, zip, shipping_address }, { auth }) {
+  auth = auth.user.id
+  let responseUser;
+    if(!email) {
+      const user = await models.User.findOne({ where: { email }})
+      if(!user) {
+        responseUser = await models.User.update({
+        name,
+        email,
+        description,
+        city,
+        state,
+        zip,
+        shipping_address
+      },
+    { where: { id: auth },
+      returning: true,
+      plain: true
+    }
+    )
+    } else {
+      throw new Error('Email already exists')
+    }
+  } else {
+    responseUser = await models.User.update({
+      name,
+      email,
+      description,
+      city,
+      state,
+      zip,
+      shipping_address
+    },
+    { where: { id: auth },
+      returning: true,
+      plain: true
+    }
+    )
+  }
+  console.log(await responseUser[1].dataValues)
+  return  await responseUser[1].dataValues
+}
+>>>>>>> 36abed2... add postgres options to resolvers and await the response data, also changed the response user array to return the 1st object's data in the array
 
 export async function login(parentValue, { email, password }) {
   const user = await models.User.findOne({ where: { email } })

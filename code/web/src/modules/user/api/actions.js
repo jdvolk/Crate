@@ -66,6 +66,48 @@ export function login(userCredentials, isLoading = true) {
   }
 }
 
+<<<<<<< HEAD
+=======
+export function updateUser(userDetails) {
+  return dispatch => {
+    return axios.post(routeApi, mutation({
+      operation: 'userUpdate',
+      variables: userDetails,
+      fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
+    }))
+    .then(response => {
+      // dispatch(setUser(token, user))
+      console.log('response', response);
+      // let error = ''
+
+      // if (response.data.errors && response.data.errors.length > 0) {
+      //   error = response.data.errors[0].message
+      // } else {
+      //   const user = response.data.data.userUpdate
+      //   console.log('user', user);
+
+      //   dispatch(setUser(user))
+
+        // updateUser(user)
+      // }
+
+      // dispatch({
+      //   type: LOGIN_RESPONSE,
+      //   error
+      // })
+
+      })
+    .catch(error => {
+      // dispatch({
+      //   type: UPDATE_USER,
+      //   error: 'please try again'
+      // })
+
+    })
+  }
+}
+
+>>>>>>> 36abed2... add postgres options to resolvers and await the response data, also changed the response user array to return the 1st object's data in the array
 // Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
   // Update token
