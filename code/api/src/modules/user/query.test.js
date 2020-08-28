@@ -24,7 +24,7 @@ describe('user_queries', () => {
     .send({ query: '{ users { email name description} }'})
     .expect(200)
 
-    console.log(response.body)
+    expect(response.body.data.users.length).toEqual(2)
   })
 
   it('returns  can return a user', async () => {
@@ -33,7 +33,8 @@ describe('user_queries', () => {
     .send({query: '{ user(id: 2) { email name}}'})
     .expect(200)
 
-    console.log(response.body)
+    expect(response.body.data.user.email).toEqual("user@crate.com")
+    expect(response.body.data.user.name).toEqual("The User")
   })
 
   it('is_true', () => {
