@@ -21,7 +21,16 @@ describe('user_queries', () => {
   it('returns all users', async () => {
     const response = await request(server)
     .get('/')
-    .send({ query: '{ users { email name } }'})
+    .send({ query: '{ users { email name description} }'})
+    .expect(200)
+
+    console.log(response.body)
+  })
+
+  it('returns  can return a user', async () => {
+    const response = await request(server)
+    .get('/')
+    .send({query: '{ user(id: 2) { email name}}'})
     .expect(200)
 
     console.log(response.body)
