@@ -29,7 +29,7 @@ export async function create(parentValue, { name, email, password }) {
 
 //Update
 
-export async function update(parentValue, { name, email, description, city, state, zip, shipping_address }, { auth }) {
+export async function update(parentValue, { name, email, description, city, state, zip, shipping_address, image }, { auth }) {
   auth = auth.user.id
   let responseUser;
     if(!email) {
@@ -42,7 +42,8 @@ export async function update(parentValue, { name, email, description, city, stat
         city,
         state,
         zip,
-        shipping_address
+        shipping_address,
+        image
       },
     { where: { id: auth },
       returning: true,
@@ -60,7 +61,8 @@ export async function update(parentValue, { name, email, description, city, stat
       city,
       state,
       zip,
-      shipping_address
+      shipping_address,
+      image
     },
     { where: { id: auth },
       returning: true,
