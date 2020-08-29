@@ -24,6 +24,9 @@ module.exports = function(sequelize, DataTypes) {
     zip: {
       type: DataTypes.TEXT
     },
+    image: {
+      type: DataTypes.TEXT
+    },
     password: {
       type: DataTypes.TEXT
     },
