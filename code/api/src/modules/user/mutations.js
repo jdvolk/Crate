@@ -69,6 +69,11 @@ export const userUpdate = {
     zip: {
       name: 'zip',
       type: GraphQLString
+    },
+
+    image: {
+      name: 'image',
+      type: GraphQLString
     }
   },
   resolve: update
