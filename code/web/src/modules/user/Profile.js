@@ -57,7 +57,7 @@ class Profile extends React.Component {
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{this.props.user.details.name}</H4>
         <div 
-          style={{ height: '200px', width: '200px', overflow: 'hidden', margin: '0 auto'}}
+          style={{ height: '200px', width: '200px', overflow: 'hidden', margin: '0 auto', borderRadius: '15px'}}
         >
           <img src={this.state.user.image || this.props.user.details.image} alt='your profile image' style={{height: '200px', borderRadius: '15px'}}/><br />
         </div>
