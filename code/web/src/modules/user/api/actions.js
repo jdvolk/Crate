@@ -11,6 +11,7 @@ export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'
 
 // Actions
 
@@ -36,7 +37,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role}', 'token']
+      fields: ['user {name, email, role, shipping_address, city, state, zip, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -66,8 +67,6 @@ export function login(userCredentials, isLoading = true) {
   }
 }
 
-<<<<<<< HEAD
-=======
 export function updateUser(userDetails) {
   return dispatch => {
     return axios.post(routeApi, mutation({
@@ -76,7 +75,9 @@ export function updateUser(userDetails) {
       fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
     }))
     .then(response => {
+
       // dispatch(setUser(token, user))
+
       console.log('response', response);
       // let error = ''
 
@@ -87,7 +88,6 @@ export function updateUser(userDetails) {
       //   console.log('user', user);
 
       //   dispatch(setUser(user))
-
         // updateUser(user)
       // }
 
@@ -103,11 +103,11 @@ export function updateUser(userDetails) {
       //   error: 'please try again'
       // })
 
+
     })
   }
 }
 
->>>>>>> 36abed2... add postgres options to resolvers and await the response data, also changed the response user array to return the 1st object's data in the array
 // Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
   // Update token
@@ -128,6 +128,8 @@ export function register(userDetails) {
     }))
   }
 }
+
+
 
 // Log out user and remove token from localStorage
 export function logout() {
