@@ -28,6 +28,7 @@ const UserUpdateType = new GraphQLObjectType({
   description: 'User Update type',
 
   fields: () => ({
+    id: { type: GraphQLInt },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     city: { type: GraphQLString },
