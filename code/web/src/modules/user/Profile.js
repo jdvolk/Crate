@@ -19,16 +19,21 @@ import { logout } from './api/actions'
 
 // Component
 class Profile extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       modalDisplay: false,
+      user : props.user.details
     }
   }
 
   toggleModal = () => {
+    let user = localStorage.getItem('user')
     this.setState((prevState) => {
-      return { modalDisplay: !prevState.modalDisplay }
+      return {
+        modalDisplay: !prevState.modalDisplay,
+        user : JSON.parse(user)
+      }
     })
   }
 
@@ -51,12 +56,12 @@ class Profile extends React.Component {
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{this.props.user.details.name}</H4>
-
-        <img src='' alt='your profile image'/><br />
-        <Button theme="primary" style={{ margin: '0.5em' }}>Update Image</Button>
-
-
-        <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.email}</p>
+        <div 
+          style={{ height: '200px', width: '200px', overflow: 'hidden', margin: '0 auto'}}
+        >
+          <img src={this.state.user.image || this.props.user.details.image} alt='your profile image' style={{height: '200px', borderRadius: '15px'}}/><br />
+        </div>
+        <p style={{ color: grey2, marginBottom: '2em', marginTop: '2em' }}>{this.props.user.details.email}</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.shipping_address}</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.city}, {this.props.user.details.state} {this.props.user.details.zip}</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{this.props.user.details.description}</p>

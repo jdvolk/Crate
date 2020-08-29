@@ -22,6 +22,7 @@ class ProfileForm extends PureComponent {
     this.state = {
       name: props.user.details.name,
       email: props.user.details.email,
+      image: props.user.details.image,
       shipping_address: props.user.details.shipping_address,
       city: props.user.details.city,
       state: props.user.details.state,
@@ -36,8 +37,10 @@ class ProfileForm extends PureComponent {
     })
   }
 
-  onSubmit = () => {
+  onSubmit = (event) => {
+    event.preventDefault()
     updateUser(this.state)
+    this.props.toggleModal()
   }
 
   render() {
@@ -52,6 +55,15 @@ class ProfileForm extends PureComponent {
             onChange={this.handleChange}
             value={this.state.email || ''}
             name='email'
+          />
+          <br />
+          <p style={{ color: grey2 }}>Profile Image:</p>
+          <input 
+            type='text' 
+            placeholder={this.props.user.details.image}
+            onChange={this.handleChange}
+            value={this.state.image || ''}
+            name='image'
           />
           <br />
           <p style={{ color: grey2 }}>Address:</p>

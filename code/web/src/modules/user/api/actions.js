@@ -37,7 +37,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role, shipping_address, city, state, zip, description}', 'token']
+      fields: ['user {name, email, image, role, shipping_address, city, state, zip, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -74,7 +74,7 @@ export function updateUser(userDetails) {
     return axios.post(routeApi, mutation({
       operation: 'userUpdate',
       variables: userDetails,
-      fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
+      fields: ['name', 'email', 'image', 'city', 'state', 'zip', 'description', 'shipping_address']
     }))
 }
 
