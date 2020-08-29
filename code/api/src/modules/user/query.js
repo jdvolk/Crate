@@ -12,10 +12,10 @@ export const users = {
 }
 
 //Update
-export const userUpdate = {
-  type: new GraphQLList(UserType),
-  resolve: update
-}
+// export const userUpdate = {
+//   type: new GraphQLList(UserType),
+//   resolve: update
+// }
 
 // By ID
 export const user = {

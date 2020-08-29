@@ -11,6 +11,7 @@ export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'
 
 // Actions
 
@@ -36,7 +37,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role}', 'token']
+      fields: ['user {name, email, role, shipping_address, city, state, zip, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -66,6 +67,47 @@ export function login(userCredentials, isLoading = true) {
   }
 }
 
+export function updateUser(userDetails) {
+  return dispatch => {
+    return axios.post(routeApi, mutation({
+      operation: 'userUpdate',
+      variables: userDetails,
+      fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
+    }))
+    .then(response => {
+
+      // dispatch(setUser(token, user))
+
+      console.log('response', response);
+      // let error = ''
+
+      // if (response.data.errors && response.data.errors.length > 0) {
+      //   error = response.data.errors[0].message
+      // } else {
+      //   const user = response.data.data.userUpdate
+      //   console.log('user', user);
+
+      //   dispatch(setUser(user))
+        // updateUser(user)
+      // }
+
+      // dispatch({
+      //   type: LOGIN_RESPONSE,
+      //   error
+      // })
+
+      })
+    .catch(error => {
+      // dispatch({
+      //   type: UPDATE_USER,
+      //   error: 'please try again'
+      // })
+
+
+    })
+  }
+}
+
 // Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
   // Update token
@@ -86,6 +128,8 @@ export function register(userDetails) {
     }))
   }
 }
+
+
 
 // Log out user and remove token from localStorage
 export function logout() {

@@ -18,7 +18,12 @@ const UserType = new GraphQLObjectType({
     password: { type: GraphQLString },
     role: { type: GraphQLString },
     createdAt: { type: GraphQLString },
-    updatedAt: { type: GraphQLString }
+    updatedAt: { type: GraphQLString },
+    city: { type: GraphQLString },
+    state: { type: GraphQLString },
+    zip: { type: GraphQLString },
+    shipping_address: { type: GraphQLString },
+    description: { type: GraphQLString }
   })
 })
 
@@ -28,6 +33,7 @@ const UserUpdateType = new GraphQLObjectType({
   description: 'User Update type',
 
   fields: () => ({
+    id: { type: GraphQLInt },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     city: { type: GraphQLString },
