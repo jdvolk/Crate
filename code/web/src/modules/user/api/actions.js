@@ -75,6 +75,9 @@ export function updateUser(userDetails) {
       fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
     }))
     .then(response => {
+
+      // dispatch(setUser(token, user))
+
       console.log('response', response);
       // let error = ''
 
@@ -85,8 +88,7 @@ export function updateUser(userDetails) {
       //   console.log('user', user);
 
       //   dispatch(setUser(user))
-
-      //   updateUser(user)
+        // updateUser(user)
       // }
 
       // dispatch({
@@ -96,10 +98,11 @@ export function updateUser(userDetails) {
 
       })
     .catch(error => {
-      dispatch({
-        type: UPDATE_USER,
-        error: 'please try again'
-      })
+      // dispatch({
+      //   type: UPDATE_USER,
+      //   error: 'please try again'
+      // })
+
 
     })
   }
