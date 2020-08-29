@@ -68,44 +68,14 @@ export function login(userCredentials, isLoading = true) {
 }
 
 export function updateUser(userDetails) {
-  return dispatch => {
+    const token = localStorage.getItem('token');
+    window.localStorage.setItem('user', JSON.stringify(userDetails))
+    setUser(token, userDetails)
     return axios.post(routeApi, mutation({
       operation: 'userUpdate',
       variables: userDetails,
       fields: ['name', 'email', 'city', 'state', 'zip', 'description', 'shipping_address']
     }))
-    .then(response => {
-
-      // dispatch(setUser(token, user))
-
-      console.log('response', response);
-      // let error = ''
-
-      // if (response.data.errors && response.data.errors.length > 0) {
-      //   error = response.data.errors[0].message
-      // } else {
-      //   const user = response.data.data.userUpdate
-      //   console.log('user', user);
-
-      //   dispatch(setUser(user))
-        // updateUser(user)
-      // }
-
-      // dispatch({
-      //   type: LOGIN_RESPONSE,
-      //   error
-      // })
-
-      })
-    .catch(error => {
-      // dispatch({
-      //   type: UPDATE_USER,
-      //   error: 'please try again'
-      // })
-
-
-    })
-  }
 }
 
 // Set user token and info in localStorage and cookie
