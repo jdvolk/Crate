@@ -34,13 +34,6 @@ export default (state = userInitialState, action) => {
         isLoading: false
       }
 
-    case UPDATE_USER: 
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      }
-
     case LOGOUT:
       return {
         ...state,

@@ -36,14 +36,8 @@ class ProfileForm extends PureComponent {
     })
   }
 
-  onSubmit = (event) => {
-    event.preventDefault()
-
-    updateUser(this.state)()
-
-      // .then(response => {
-      // })
-
+  onSubmit = () => {
+    updateUser(this.state)
   }
 
   render() {
